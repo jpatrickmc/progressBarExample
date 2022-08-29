@@ -19,6 +19,7 @@ const ProgressBar = ({ value, colors = ["yellow", "green"] }) => {
         <LinearGradient
           start={{ x: 0, y: 1 }}
           end={{ x: 1, y: 1 }}
+          locations={[0.2, 0.8]}
           colors={colors}
           style={[styles.valueBar, { width: formatValue() }]}
         />
@@ -30,8 +31,8 @@ const ProgressBar = ({ value, colors = ["yellow", "green"] }) => {
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      <ProgressBar value={0.4} />
-      <StatusBar style='auto' />
+      <ProgressBar value={0.9} colors={["#85C600", "#07682E"]} />
+      <StatusBar style="auto" />
     </SafeAreaView>
   );
 }
@@ -62,13 +63,15 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   baseBar: {
-    height: 5,
+    height: 6,
     width: "100%",
-    backgroundColor: "grey",
+    backgroundColor: "#DDE5DA",
+    borderRadius: 100,
   },
   valueBar: {
-    height: 5,
+    height: 6,
     backgroundColor: "red",
     position: "absolute",
+    borderRadius: 10,
   },
 });
