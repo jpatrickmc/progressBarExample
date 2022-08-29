@@ -1,20 +1,28 @@
 import React, { useRef, useState, useLayoutEffect, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
-import { Animated, SafeAreaView, StyleSheet, Text, View } from "react-native";
-import { ProgressBar, useTheme } from "react-native-paper";
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 
-const renderProgressBar = () => {
+const ProgressBar = ({ value, colors = ["yellow", "green"] }) => {
+  const formatValue = () => {
+    return `${value * 100}%`;
+  };
+
   return (
     <View>
       <View style={styles.metricsContainer}>
-        <Text style={styles.boldText}>3 of 5 </Text>
+        <Text style={styles.boldText}>{value} of 5 </Text>
         <Text style={styles.regText}>jobs complete</Text>
       </View>
-      <ProgressBar
-        progress={0.3}
-        color={"#07682E"} // #85C600 #07682E #DDE5DA
-        style={{ height: 6, borderRadius: 100, backgroundColor: "#DDE5DA" }}
-      />
+      <View>
+        <View style={styles.baseBar} />
+        <LinearGradient
+          start={{ x: 0, y: 1 }}
+          end={{ x: 1, y: 1 }}
+          colors={colors}
+          style={[styles.valueBar, { width: formatValue() }]}
+        />
+      </View>
     </View>
   );
 };
@@ -22,7 +30,7 @@ const renderProgressBar = () => {
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      {renderProgressBar()}
+      <ProgressBar value={0.4} />
       <StatusBar style='auto' />
     </SafeAreaView>
   );
@@ -52,5 +60,15 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     paddingRight: 15,
     borderRadius: 5,
+  },
+  baseBar: {
+    height: 5,
+    width: "100%",
+    backgroundColor: "grey",
+  },
+  valueBar: {
+    height: 5,
+    backgroundColor: "red",
+    position: "absolute",
   },
 });
