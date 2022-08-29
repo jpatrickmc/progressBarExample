@@ -1,58 +1,10 @@
-import { useRef, useState, useLayoutEffect, useEffect } from "react";
+import React, { useRef, useState, useLayoutEffect, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { Animated, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import { ProgressBar, useTheme } from "react-native-paper";
 
-const Progress = ({ step, steps, height }) => {
-  const [width, setWidth] = useState(0);
-  const animatedValue = useRef(new Animated.Value(-1000)).current;
-  const reactive = useRef(new Animated.Value(-1000)).current;
-
-  useEffect(() => {
-    Animated.timing(animatedValue, {
-      toValue: reactive,
-      duration: 300,
-      useNativeDriver: true,
-    }).start();
-  }, []);
-
-  return (
-    <>
-      <Text style={{ fontSize: 12, fontWeight: "900", marginBottom: 4 }}>
-        {step} / {steps}
-      </Text>
-      <View
-        style={{
-          height,
-          backgroundColor: "gray",
-          borderRadius: height,
-          overflow: "hidden",
-        }}
-      >
-        <View
-          onLayout={(e) => {
-            const newWidth = e.nativeEvent.layout.width;
-
-            setWidth(newWidth);
-          }}
-          style={{
-            height,
-            width: "100%",
-            borderRadius: height,
-            backgroundColor: "blue",
-            position: "absolute",
-            left: 0,
-            top: 0,
-          }}
-        />
-      </View>
-    </>
-  );
-};
-
 const renderProgressBar = () => {
   return (
-    // <View style={jobListScreenStyles.progressBarContainer}>
     <View>
       <View style={styles.metricsContainer}>
         <Text style={styles.boldText}>3 of 5 </Text>
@@ -71,7 +23,7 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       {renderProgressBar()}
-      <StatusBar style="auto" />
+      <StatusBar style='auto' />
     </SafeAreaView>
   );
 }
