@@ -1,27 +1,14 @@
-import React, { useRef, useState, useLayoutEffect, useEffect } from "react";
+import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import { ProgressBar } from "./components/ProgressBar";
 
-const ProgressBar = ({ value, colors = ["yellow", "green"] }) => {
-  const formatValue = () => {
-    return `${value * 100}%`;
-  };
-
+const MetricsLabel = () => {
   return (
     <View>
       <View style={styles.metricsContainer}>
-        <Text style={styles.boldText}>{value} of 5 </Text>
-        <Text style={styles.regText}>jobs complete</Text>
-      </View>
-      <View>
-        <View style={styles.baseBar} />
-        <LinearGradient
-          start={{ x: 0, y: 1 }}
-          end={{ x: 1, y: 1 }}
-          colors={colors}
-          style={[styles.valueBar, { width: formatValue() }]}
-        />
+        <Text style={styles.boldText}>8 of 10 </Text>
+        <Text style={styles.regText}>complete</Text>
       </View>
     </View>
   );
@@ -30,7 +17,8 @@ const ProgressBar = ({ value, colors = ["yellow", "green"] }) => {
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      <ProgressBar value={0.4} />
+      <MetricsLabel />
+      <ProgressBar value={0.8} colors={["#4776E6", "#8E54E9"]} />
       <StatusBar style='auto' />
     </SafeAreaView>
   );
@@ -54,21 +42,5 @@ const styles = StyleSheet.create({
   regText: {
     color: "black",
     fontSize: 18,
-  },
-  gradientContainer: {
-    flex: 1,
-    paddingLeft: 15,
-    paddingRight: 15,
-    borderRadius: 5,
-  },
-  baseBar: {
-    height: 5,
-    width: "100%",
-    backgroundColor: "grey",
-  },
-  valueBar: {
-    height: 5,
-    backgroundColor: "red",
-    position: "absolute",
   },
 });
