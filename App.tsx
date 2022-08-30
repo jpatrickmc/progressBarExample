@@ -38,7 +38,7 @@ export default function App() {
     <SafeAreaView style={styles.container}>
       <MetricsLabel jobsComplete={jobsComplete} totalJobs={totalJobs} />
       <ProgressBar
-        value={jobsComplete / totalJobs}
+        value={totalJobs !== 0 ? jobsComplete / totalJobs : 0}
         colors={["#4776E6", "#8E54E9"]}
       />
       <StatusBar style='auto' />
