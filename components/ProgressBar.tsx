@@ -9,16 +9,14 @@ export const ProgressBar = ({ value, colors }) => {
 
   return (
     <View>
-      <View>
-        <View style={styles.baseBar} />
-        <LinearGradient
-          start={{ x: 0, y: 1 }}
-          end={{ x: 1, y: 1 }}
-          colors={colors}
-          style={[styles.valueBar, { width: formatValue() }]}
-          locations={[0.3, 0.7]}
-        />
-      </View>
+      <View style={styles.baseBar} />
+      <LinearGradient
+        start={{ x: 0, y: 1 }}
+        end={{ x: 1, y: 1 }}
+        colors={colors}
+        style={[styles.valueBar, { width: formatValue() }]}
+        locations={[0.3, 0.7]}
+      />
     </View>
   );
 };
